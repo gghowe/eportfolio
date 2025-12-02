@@ -53,8 +53,8 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100vh; /* Fixed to viewport height */
-            max-height: 100vh; /* Limit maximum height */
+            height: 60vh; /* Reduced height so it doesn't feel too tall */
+            max-height: 60vh;
             background: #050507; /* Solid black background to hide landing section */
             pointer-events: none;
             z-index: 5; /* Above landing (z-index: 1) but below content (z-index: 10) */
@@ -149,7 +149,7 @@
             width: 100%;
             position: relative;
             z-index: 2;
-            margin-top: 18rem;
+            margin-top: 15rem; /* raised further up */
         }
 
         /* Subtle black grid overlay for landing section */
@@ -180,7 +180,7 @@
         }
 
         .landing-title {
-            font-size: 4.5rem;
+            font-size: 3.8rem; /* slightly smaller */
             font-weight: 800;
             color: #ffffff;
             text-align: left;
@@ -188,18 +188,18 @@
             line-height: 1.2;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
             letter-spacing: -0.02em;
-            margin-left: -8rem; /* Move to the left */
+            margin-left: -4rem; /* moved a bit to the right */
             margin-top: 4rem; /* Move down */
         }
 
         .landing-intro {
-            font-size: 1.8rem;
+            font-size: 1.6rem; /* slightly smaller */
             color: #cbd5e1;
             line-height: 1.7;
             text-align: left;
-            max-width: 75%; /* Increased from 60% */
+            max-width: 60%; /* narrower so text wraps sooner */
             margin-bottom: 1.5rem;
-            margin-left: -8rem; /* Move to the left */
+            margin-left: -4rem; /* moved a bit to the right */
         }
 
         .landing-intro:last-of-type {
@@ -213,7 +213,7 @@
             height: 600px;
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             background: linear-gradient(135deg, hsl(var(--hue1) 70% 50% / 0.3), hsl(var(--hue2) 70% 40% / 0.2));
-            top: calc(10% + 18rem);
+            top: calc(10% + 15rem); /* raised along with landing content */
             right: 0%; /* Moved left further */
             filter: blur(80px);
             animation: shape-move 20s ease-in-out infinite, shape-color 15s ease-in-out infinite, shape-left-drift 60s ease-in-out infinite;
@@ -241,7 +241,7 @@
             border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%;
             background: linear-gradient(225deg, hsl(var(--hue1) 50% 20% / 0.15), hsl(var(--hue2) 50% 15% / 0.1));
             top: calc(50% + 18rem);
-            left: -15%;
+            left: -25%; /* Move further left */
             filter: blur(60px);
             animation: shape-left-appear 45s ease-in-out infinite;
             z-index: 0;
@@ -368,10 +368,10 @@
 
         @keyframes shape-left-drift {
             0%, 85%, 100% {
-                right: -10%;
+                right: 5%;  /* moved slightly more to the right */
             }
             5%, 80% {
-                right: 5%;
+                right: 20%; /* moved slightly more to the right */
             }
         }
 
@@ -439,7 +439,7 @@
         }
 
         .nav-container {
-            max-width: 1400px;
+            max-width: 1800px; /* match wider card width */
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -508,16 +508,16 @@
         }
 
         /* Scrolling sections need top spacing to start below fixed landing */
-        #experience,
+        #information-ecology,
         #projects,
-        #socials,
+        #digital-ethnography,
         #contact {
             padding-top: 2rem; /* Minimal padding - sections start right after landing */
             z-index: 10; /* Higher z-index so sections scroll over landing */
         }
 
         /* First scrolling section gets a bit more top padding */
-        #experience {
+        #information-ecology {
             padding-top: 4rem;
         }
 
@@ -568,12 +568,12 @@
         }
 
         .glass-card {
-            --glow-intensity: 0;
+            --glow-intensity: 1;
             --edge-blur: 0;
             --card-height: auto; /* Will be set dynamically to snap to grid */
-            /* Fully transparent by default - clear glass */
-            background: rgba(5, 5, 7, var(--glow-intensity));
-            backdrop-filter: blur(calc(2px + var(--glow-intensity) * 10px));
+            /* Solid dark background, no blur */
+            background: #050507;
+            backdrop-filter: none;
             border: var(--border) solid var(--border-color);
             border-radius: var(--radius);
             padding: 2rem;
@@ -581,10 +581,9 @@
             z-index: 1;
             width: 100%;
             height: var(--card-height);
-            /* Apply opacity to entire card - even less aggressive ramp: starts much higher, very gradual */
-            opacity: calc(0.7 + var(--glow-intensity) * 0.3);
-            /* Blur based on vertical position - highest at edges, lowest in center */
-            filter: blur(calc(var(--edge-blur) * 1px)); /* Reduced blur amount */
+            /* No scroll-based opacity or blur */
+            opacity: 1;
+            filter: none;
             box-shadow: 
                 hsl(var(--hue2) 50% 2%) 0px 10px 16px -8px, 
                 hsl(var(--hue2) 50% 4%) 0px 20px 36px -14px,
@@ -603,8 +602,8 @@
             bottom: 0;
             border-radius: var(--radius);
             background: var(--glass-bg);
-            /* Gradient only shows at full glow for accent */
-            opacity: calc(var(--glow-intensity) * 0.3);
+            /* Subtle constant accent gradient */
+            opacity: 0.3;
             pointer-events: none;
             z-index: -1;
             transition: opacity 0.6s var(--ease);
@@ -627,6 +626,11 @@
             height: 1px;
             background: linear-gradient(90deg, transparent, hsl(var(--hue1) 80% 60% / 0.3), transparent);
             border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        /* Let the long Digital Ethnography card grow naturally with its content */
+        #digital-ethnography .glass-card {
+            height: auto;
         }
 
         .section-title {
@@ -682,7 +686,7 @@
             position: relative;
             width: 100%;
             max-width: 900px;
-            margin: 0 auto;
+            margin: 0 auto 2.5rem; /* extra bottom space below images */
             border-radius: 4px;
             overflow: hidden;
             box-shadow: 
@@ -691,11 +695,11 @@
         }
 
         .home-lab-image {
-            width: 105%;
+            width: 100%;
             height: auto;
             display: block;
-            margin-left: -2.5%;
-            object-fit: cover;
+            margin-left: 0;
+            object-fit: contain; /* reduce cropping */
         }
 
         .highlight {
@@ -977,6 +981,12 @@
                 padding: 5rem 1rem 3rem;
             }
 
+            .landing-title,
+            .landing-intro {
+                margin-left: 0;      /* prevent clipping on small screens */
+                max-width: 100%;
+            }
+
             .hero-content h1 {
                 font-size: 2.5rem;
             }
@@ -1066,9 +1076,8 @@
             <div class="nav-container">
                 <a href="#landing" class="nav-logo">Garrett Howe</a>
                 <ul class="nav-links">
-                    <li><a href="#landing" class="active">Landing</a></li>
+                    <li><a href="#landing" class="active">About Me</a></li>
                     <li><a href="#information-ecology">Information Ecology</a></li>
-                    <li><a href="#experience">Experience</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#digital-ethnography">Digital Ethnography</a></li>
                     <li><a href="#contact">Contact</a></li>
@@ -1117,17 +1126,10 @@
 
                         Or upload the image to GitHub / hosting of your choice and paste the direct URL below.
                     -->
-                    <img src="major assignment 1 - network map.png"
+                    <img src="https://raw.githubusercontent.com/gghowe/eportfolio/main/major%20assignment%201%20-%20network%20map.png"
                          alt="Network map of my home lab information ecology"
                          class="home-lab-image">
                 </div>
-
-                <!-- Reflection placeholder -->
-                <hr style="border-color: rgba(148, 163, 184, 0.35); margin: 2rem 0 1.5rem;">
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: #e2e8f0;">Reflection on Major Assignment 1</h3>
-                <p style="font-size: 0.98rem; color: #94a3b8; margin-bottom: 1.5rem;">
-                    [Add a brief reflection here explaining how you revised this piece for the ePortfolio, how it demonstrates your understanding of information ecologies, and what changed based on your professor’s feedback.]
-                </p>
 
                 <!-- Works Cited -->
                 <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: #e2e8f0;">Works Cited</h3>
@@ -1136,25 +1138,6 @@
                 </p>
                 <p style="font-size: 0.95rem; color: #94a3b8; margin-bottom: 0.25rem;">
                     Nardi, Bonnie A., and Vicki L. O’Day. <span style="font-style: italic;">Information Ecologies: Using Technology with Heart</span>. MIT Press, 1999.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience">
-        <div class="container">
-            <div class="glass-card">
-                <h2 class="section-title">
-                    <div class="section-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 .414-.336.75-.75.75h-4.5a.75.75 0 01-.75-.75v-4.25m0 0h-4.5m4.5 0v-4.25m0 0h-4.5m4.5 0v-4.25m0 0h-4.5m4.5 0V5.85m0 0h-4.5m4.5 0h4.5m-4.5 0v4.25m4.5-4.25v4.25m0 0h-4.5m4.5 0h4.5" />
-                        </svg>
-                    </div>
-                    Experience
-                </h2>
-                <p style="font-size: 1.1rem; color: #cbd5e1;">
-                    [Your experience content will go here - work history, skills, certifications, etc.]
                 </p>
             </div>
         </div>
@@ -1199,16 +1182,13 @@
                     </div>
                     Building Knowledge in r/homelab: A Digital Ethnography
                 </h2>
+                <!-- Preview text shown before expanding -->
                 <p style="font-size: 1.05rem; color: #cbd5e1; margin-bottom: 1.25rem;">
-                    This section adapts my digital ethnography of the r/homelab subreddit. It focuses on how members use writing to teach each other, document experiments, and build long‑term collective knowledge around home lab infrastructure.
+                    This section contains a digital ethnography I conducted that focuses on how members within the r/homelabs forum teach each other, document experiments, and build long‑term collective knowledge around home lab infrastructure.
                 </p>
 
-                <button class="read-more-btn" type="button" data-target="#digital-ethnography-content">
-                    Read Full Ethnography
-                </button>
-
                 <div id="digital-ethnography-content" class="collapsible-content">
-                    <h3 style="font-size: 1.2rem; margin-top: 1.75rem; margin-bottom: 0.75rem; color: #e2e8f0;">
+                    <h3 style="font-size: 1.2rem; margin-top: 1.0rem; margin-bottom: 0.75rem; color: #e2e8f0;">
                         Building Knowledge in r/homelab: A Digital Ethnography of Collaborative Technical Writing
                     </h3>
                     <p style="font-size: 1rem; color: #cbd5e1; margin-bottom: 0.75rem;">
@@ -1236,7 +1216,7 @@
                         Example 1: The Power‑Saving Discussion
                     </h4>
                     <div class="home-lab-showcase" style="margin-top: 1.25rem;">
-                        <img src="initial psa post.png"
+                        <img src="https://raw.githubusercontent.com/gghowe/eportfolio/main/initial%20psa%20post.png"
                              alt="Initial r/homelab PSA post showing power savings from removing unused PCIe cards"
                              class="home-lab-image">
                     </div>
@@ -1247,7 +1227,7 @@
                         The post worked because it was specific (exact models and measurements), explained why the change mattered (power and cost), and invited community participation. Reddit’s upvote system pushed it higher in the feed as early readers found it useful, and the threaded comments allowed multiple conversations to develop at once.
                     </p>
                     <div class="home-lab-showcase" style="margin-top: 1.25rem;">
-                        <img src="cstates thread.png"
+                        <img src="https://raw.githubusercontent.com/gghowe/eportfolio/main/cstates%20thread.png"
                              alt="Comment thread in r/homelab discussing CPU C-states and power management"
                              class="home-lab-image">
                     </div>
@@ -1259,12 +1239,12 @@
                         Example 2: The Tutorial Post
                     </h4>
                     <div class="home-lab-showcase" style="margin-top: 1.25rem;">
-                        <img src="GPU Install image.png"
+                        <img src="https://raw.githubusercontent.com/gghowe/eportfolio/main/GPU%20Install%20image.png"
                              alt="User installing an Intel ARC A310 GPU in a 1U server chassis"
                              class="home-lab-image">
                     </div>
                     <div class="home-lab-showcase" style="margin-top: 1.25rem;">
-                        <img src="markdown commands image.png"
+                        <img src="https://raw.githubusercontent.com/gghowe/eportfolio/main/markdown%20commands%20image.png"
                              alt="Markdown code blocks showing installation commands used in the ARC A310 tutorial"
                              class="home-lab-image">
                     </div>
@@ -1304,13 +1284,6 @@
                         Finally, J. C. R. Licklider’s notion of human‑computer symbiosis appears in how users rely on diagnostic tools, logs, and command‑line outputs while still making human decisions about what to try next. Posts and comments document this cycle of testing, observing, and adjusting, showing humans and machines working together.
                     </p>
 
-                    <!-- Reflection placeholder -->
-                    <hr style="border-color: rgba(148, 163, 184, 0.35); margin: 1.75rem 0 1.5rem;">
-                    <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: #e2e8f0;">Reflection on Major Assignment 2</h3>
-                    <p style="font-size: 0.98rem; color: #94a3b8; margin-bottom: 1.5rem;">
-                        [Add a brief reflection here explaining how you revised this ethnography for the ePortfolio, how you leaned into multimodal elements (images, formatting, structure), and what changed based on your professor’s feedback.]
-                    </p>
-
                     <!-- Works Cited -->
                     <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: #e2e8f0;">Works Cited</h3>
                     <p style="font-size: 0.95rem; color: #94a3b8; margin-bottom: 0.25rem;">
@@ -1326,6 +1299,10 @@
                         Rheingold, Howard. “Participation Power.” <span style="font-style: italic;">Net Smart: How to Thrive Online</span>. MIT Press, 2012, pp. 111–126.
                     </p>
                 </div>
+
+                <button class="read-more-btn" type="button" data-target="#digital-ethnography-content" style="margin-top: 1.5rem;">
+                    Read Full Ethnography
+                </button>
             </div>
         </div>
     </section>
@@ -1359,12 +1336,13 @@
                         <label for="message">Message</label>
                         <textarea id="message" name="message" required></textarea>
                     </div>
+                    <div class="form-group" style="flex-direction: row; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" id="confirmEmail" name="confirmEmail" style="width: auto; margin: 0;">
+                        <label for="confirmEmail" style="margin: 0;">Receive confirmation email</label>
+                    </div>
                     <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
                     <div id="formMessage" class="form-message"></div>
                 </form>
-                <p style="font-size: 0.9rem; color: #94a3b8; text-align: center; margin-top: 1.5rem;">
-                    Replace the webhook URL in the JavaScript with your Apps Script webhook URL.
-                </p>
             </div>
         </div>
     </section>
@@ -1395,29 +1373,36 @@
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-links a');
             const viewportHeight = window.innerHeight;
-            const scrollY = window.scrollY;
-            
-            let current = '';
-            
-            // Check if we're viewing the landing section (fixed, always at top)
-            if (scrollY < viewportHeight) {
-                current = 'landing';
-            } else {
-                // Check other sections
-                sections.forEach(section => {
-                    if (section.id === 'landing') return; // Skip landing, already handled
-                    
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (scrollY >= sectionTop - 200) {
-                        current = section.getAttribute('id');
-                    }
-                });
+            const viewportCenter = viewportHeight / 2;
+
+            let currentId = 'landing';
+            let closestDistance = Infinity;
+
+            sections.forEach(section => {
+                const id = section.id;
+                if (!id || id === 'landing') return;
+
+                const rect = section.getBoundingClientRect();
+                // Only consider sections that are at least partly in view
+                if (rect.bottom <= 0 || rect.top >= viewportHeight) return;
+
+                const sectionCenter = rect.top + rect.height / 2;
+                const distance = Math.abs(sectionCenter - viewportCenter);
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    currentId = id;
+                }
+            });
+
+            // If we're near the very top, force About Me as active
+            if (window.scrollY < viewportHeight * 0.4) {
+                currentId = 'landing';
             }
 
             navLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
+                const href = link.getAttribute('href');
+                if (href === `#${currentId}`) {
                     link.classList.add('active');
                 }
             });
@@ -1429,22 +1414,24 @@
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetSection = document.querySelector(targetId);
-                if (targetSection) {
-                    let offsetTop;
-                    if (targetId === '#landing') {
-                        // Landing is fixed, scroll to top
-                        offsetTop = 0;
-                    } else {
-                        // Other sections need offset for fixed navbar if it's fixed
-                        const navbar = document.querySelector('.navbar');
-                        const navbarFixed = navbar.classList.contains('fixed');
-                        offsetTop = targetSection.offsetTop - (navbarFixed ? 80 : 0);
-                    }
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
+                if (!targetSection) return;
+
+                let offsetTop;
+                if (targetId === '#landing') {
+                    // Landing is fixed, scroll to very top
+                    offsetTop = 0;
+                } else {
+                    const navbar = document.querySelector('.navbar');
+                    const navbarHeight = navbar ? navbar.offsetHeight : 0;
+                    const rect = targetSection.getBoundingClientRect();
+                    // Position section so its top sits just below the navbar
+                    offsetTop = rect.top + window.scrollY - navbarHeight;
                 }
+
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
             });
         });
 
@@ -1509,8 +1496,8 @@
 
         // Grid snapping functions
         const GRID_SIZE = 50; // Grid square size in pixels
-        const MIN_SQUARES = 20; // Minimum number of grid squares
-        const MAX_SQUARES = 30; // Maximum number of grid squares
+        const MIN_SQUARES = 22; // Minimum number of grid squares
+        const MAX_SQUARES = 36; // Maximum number of grid squares (wider cards)
 
         function snapToGrid(value, gridSize) {
             return Math.floor(value / gridSize) * gridSize;
@@ -1692,8 +1679,8 @@
                 if (contactSection) {
                     // Calculate height based on contact section position
                     const contactRect = contactSection.getBoundingClientRect();
-                    const contactBottom = contactRect.bottom + window.scrollY;
-                    // Set height to contact section bottom position
+                    // Subtract 200px so the overlay ends higher above the very bottom
+                    const contactBottom = contactRect.bottom + window.scrollY - 900;
                     backgroundEffects.style.height = `${contactBottom}px`;
                     backgroundEffects.style.maxHeight = `${contactBottom}px`;
                     gridBackground.style.height = `${contactBottom}px`;
@@ -1759,8 +1746,7 @@
         const submitBtn = document.getElementById('submitBtn');
         const formMessage = document.getElementById('formMessage');
         
-        // Replace this URL with your Apps Script webhook URL
-        const WEBHOOK_URL = 'YOUR_APPS_SCRIPT_WEBHOOK_URL_HERE';
+        const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxULhKvbcU6MEe4foso28qNvVQZIXU5Y5h5KpGFNciM25nQKvsb3nwNrOXHbL9x-KF9/exec';
 
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -1769,6 +1755,17 @@
             formMessage.classList.remove('success', 'error');
             formMessage.style.display = 'none';
             
+            // Basic email validation with regex
+            const emailValue = document.getElementById('email').value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(emailValue)) {
+                formMessage.textContent = 'Please enter a valid email address.';
+                formMessage.classList.add('error');
+                formMessage.style.display = 'block';
+                formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                return;
+            }
+
             // Disable submit button and show loading state
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
@@ -1776,9 +1773,10 @@
             // Get form data
             const formData = {
                 name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
+                email: emailValue,
                 subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value
+                message: document.getElementById('message').value,
+                confirmEmail: document.getElementById('confirmEmail').checked
             };
             
             try {
@@ -1830,6 +1828,15 @@
 
                 const expanded = content.classList.toggle('expanded');
                 btn.textContent = expanded ? 'Show Less' : 'Read Full Ethnography';
+
+                // Recalculate card and section heights so expanded content fits
+                try {
+                    if (typeof calculateCardDimensions === 'function') {
+                        calculateCardDimensions();
+                    }
+                } catch (e) {
+                    // Fail silently if for some reason calculateCardDimensions is unavailable
+                }
             });
         });
     </script>
