@@ -31,7 +31,6 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            zoom: 0.8; /* global 80% zoom */
             background: #050507;
             /* Radial gradients - fixed for depth */
             background-image: 
@@ -108,18 +107,18 @@
                 repeating-linear-gradient(
                     0deg,
                     transparent,
-                    transparent 49px,
-                    hsl(var(--hue1) 50% 30% / 0.08) 49px,
-                    hsl(var(--hue1) 50% 30% / 0.08) 50px
+                    transparent 39px,
+                    hsl(var(--hue1) 50% 30% / 0.08) 39px,
+                    hsl(var(--hue1) 50% 30% / 0.08) 40px
                 ),
                 repeating-linear-gradient(
                     90deg,
                     transparent,
-                    transparent 49px,
-                    hsl(var(--hue1) 50% 30% / 0.08) 49px,
-                    hsl(var(--hue1) 50% 30% / 0.08) 50px
+                    transparent 39px,
+                    hsl(var(--hue1) 50% 30% / 0.08) 39px,
+                    hsl(var(--hue1) 50% 30% / 0.08) 40px
                 );
-            background-size: 50px 50px, 50px 50px;
+            background-size: 40px 40px, 40px 40px;
             background-position: center, center;
         }
 
@@ -150,7 +149,7 @@
             width: 100%;
             position: relative;
             z-index: 2;
-            margin-top: 15rem; /* raised further up */
+            margin-top: 11rem; /* moved slightly further up */
         }
 
         /* Subtle black grid overlay for landing section */
@@ -181,7 +180,7 @@
         }
 
         .landing-title {
-            font-size: 3.8rem; /* slightly smaller */
+            font-size: 2.9rem; /* reduced again */
             font-weight: 800;
             color: #ffffff;
             text-align: left;
@@ -189,18 +188,16 @@
             line-height: 1.2;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
             letter-spacing: -0.02em;
-            margin-left: -4rem; /* moved a bit to the right */
             margin-top: 4rem; /* Move down */
         }
 
         .landing-intro {
-            font-size: 1.6rem; /* slightly smaller */
+            font-size: 1.3rem; /* reduced again */
             color: #cbd5e1;
             line-height: 1.7;
             text-align: left;
             max-width: 60%; /* narrower so text wraps sooner */
             margin-bottom: 1.5rem;
-            margin-left: -4rem; /* moved a bit to the right */
         }
 
         .landing-intro:last-of-type {
@@ -214,8 +211,8 @@
             height: 600px;
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             background: linear-gradient(135deg, hsl(var(--hue1) 70% 50% / 0.3), hsl(var(--hue2) 70% 40% / 0.2));
-            top: calc(10% + 15rem); /* raised along with landing content */
-            right: 0%; /* Moved left further */
+            top: calc(10% + 11rem); /* raised along with landing content again, slightly higher */
+            right: -5%; /* moved further to the right */
             filter: blur(80px);
             animation: shape-move 20s ease-in-out infinite, shape-color 15s ease-in-out infinite, shape-left-drift 60s ease-in-out infinite;
             z-index: 0;
@@ -369,10 +366,10 @@
 
         @keyframes shape-left-drift {
             0%, 85%, 100% {
-                right: 5%;  /* moved slightly more to the right */
+                right: -5%;  /* start further to the right */
             }
             5%, 80% {
-                right: 20%; /* moved slightly more to the right */
+                right: 10%; /* drift slightly left from the right edge */
             }
         }
 
@@ -440,7 +437,7 @@
         }
 
         .nav-container {
-            max-width: 1800px; /* match wider card width */
+            max-width: 1500px; /* slightly narrower navbar */
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -779,7 +776,7 @@
         .form-message {
             padding: 1rem;
             border-radius: var(--radius);
-            margin-top: 100px; /* moved further down below the form */
+            margin-top: 1rem;
             text-align: center;
             font-size: 0.95rem;
             display: none;
@@ -1015,6 +1012,7 @@
     </style>
 </head>
 <body>
+    <!-- Landing Page Section - Fixed, behind everything -->
     <section id="landing">
         <div class="abstract-shape"></div>
         <div class="abstract-shape-white"></div>
@@ -1040,8 +1038,12 @@
         </div>
     </section>
 
+    <!-- Background Effects Wrapper - Scrolls with content, above landing section -->
     <div class="background-effects">
+        <!-- Grid Background -->
         <div class="grid-background"></div>
+        
+        <!-- Floating Background Elements -->
         <div class="floating-elements">
             <div class="grid-pattern"></div>
             <div class="floating-dot"></div>
@@ -1059,11 +1061,13 @@
             <div class="data-stream" style="animation-delay: 6s;"></div>
             <div class="data-stream" style="animation-delay: 9s;"></div>
         </div>
+        <!-- Footer - appears at bottom when scrolling to end -->
         <div class="page-footer">
             <div class="page-footer-text">Garrett Howe</div>
         </div>
     </div>
 
+    <!-- Navigation Bar - Part of scrolling content -->
     <div class="navbar-wrapper">
         <div class="navbar-glow"></div>
         <nav class="navbar">
@@ -1080,6 +1084,7 @@
         </nav>
     </div>
 
+    <!-- Information Ecology / Major Assignment 1 Section -->
     <section id="information-ecology">
         <div class="container">
             <div class="glass-card">
@@ -1114,6 +1119,7 @@
                          class="home-lab-image">
                 </div>
 
+                <!-- Works Cited -->
                 <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: #e2e8f0;">Works Cited</h3>
                 <p style="font-size: 0.95rem; color: #94a3b8; margin-bottom: 0.25rem;">
                     Haas, Angela M. “Wampum as Hypertext: An American Indian Intellectual Tradition of Multimedia Theory and Practice.”
@@ -1125,6 +1131,7 @@
         </div>
     </section>
 
+    <!-- Projects Section -->
     <section id="projects">
         <div class="container">
             <div class="glass-card">
@@ -1151,6 +1158,7 @@
         </div>
     </section>
 
+    <!-- Digital Ethnography / Major Assignment 2 Section -->
     <section id="digital-ethnography">
         <div class="container">
             <div class="glass-card">
@@ -1162,6 +1170,7 @@
                     </div>
                     Building Knowledge in r/homelab: A Digital Ethnography
                 </h2>
+                <!-- Preview text shown before expanding -->
                 <p style="font-size: 1.05rem; color: #cbd5e1; margin-bottom: 1.25rem;">
                     This section contains a digital ethnography I conducted that focuses on how members within the r/homelabs forum teach each other, document experiments, and build long‑term collective knowledge around home lab infrastructure.
                 </p>
@@ -1263,6 +1272,7 @@
                         Finally, J. C. R. Licklider’s notion of human‑computer symbiosis appears in how users rely on diagnostic tools, logs, and command‑line outputs while still making human decisions about what to try next. Posts and comments document this cycle of testing, observing, and adjusting, showing humans and machines working together.
                     </p>
 
+                    <!-- Works Cited -->
                     <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: #e2e8f0;">Works Cited</h3>
                     <p style="font-size: 0.95rem; color: #94a3b8; margin-bottom: 0.25rem;">
                         Duin, Ann Hill, and Isabel Pedersen. <span style="font-style: italic;">Writing Futures: Collaborative, Algorithmic, Autonomous</span>. Springer, 2021.
@@ -1285,6 +1295,7 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section id="contact">
         <div class="container">
             <div class="glass-card">
@@ -1473,8 +1484,8 @@
 
         // Grid snapping functions
         const GRID_SIZE = 50; // Grid square size in pixels
-        const MIN_SQUARES = 22; // Minimum number of grid squares
-        const MAX_SQUARES = 36; // Maximum number of grid squares (wider cards)
+        const MIN_SQUARES = 20; // Minimum number of grid squares (slightly narrower cards)
+        const MAX_SQUARES = 30; // Maximum number of grid squares (slightly narrower cards)
 
         function snapToGrid(value, gridSize) {
             return Math.floor(value / gridSize) * gridSize;
@@ -1759,9 +1770,8 @@
             try {
                 const response = await fetch(WEBHOOK_URL, {
                     method: 'POST',
-                    // Use a \"simple\" content type to avoid CORS preflight issues
                     headers: {
-                        'Content-Type': 'text/plain;charset=utf-8',
+                        'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(formData)
                 });
@@ -1777,15 +1787,6 @@
                     
                     // Scroll to message
                     formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-                    // Auto-hide success message after 7 seconds
-                    if (formMessage._hideTimeout) {
-                        clearTimeout(formMessage._hideTimeout);
-                    }
-                    formMessage._hideTimeout = setTimeout(() => {
-                        formMessage.style.display = 'none';
-                        formMessage.classList.remove('success', 'error');
-                    }, 7000);
                 } else {
                     throw new Error('Server error');
                 }

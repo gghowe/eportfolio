@@ -4,8 +4,7 @@
  *   "name": "Sender Name",
  *   "email": "sender@example.com",
  *   "subject": "Subject line",
- *   "message": "Body text",
- *   "confirmEmail": true
+ *   "message": "Body text"
  * }
  */
 
@@ -28,7 +27,6 @@ function doPost(e) {
     var email = (data.email || '').toString().trim();
     var subject = (data.subject || '').toString().trim();
     var message = (data.message || '').toString().trim();
-    var confirmEmail = !!data.confirmEmail;
 
     if (!name || !email || !subject || !message) {
       return buildJsonResponse_(400, {
@@ -51,22 +49,6 @@ function doPost(e) {
     GmailApp.sendEmail(RECIPIENT, mailSubject, mailBody, {
       replyTo: email
     });
-
-    // Optionally send confirmation email back to the sender
-    if (confirmEmail) {
-      var confirmSubject = 'I received your message';
-      var confirmBody =
-        'Hi ' + name + ',\n\n' +
-        'Thanks for reaching out through my ePortfolio contact form. I\'ve received your message and will follow up as soon as I can.\n\n' +
-        'Here\'s a copy of what you sent:\n\n' +
-        'Subject: ' + subject + '\n\n' +
-        'Message:\n' + message + '\n\n' +
-        '- Garrett';
-
-      GmailApp.sendEmail(email, confirmSubject, confirmBody, {
-        replyTo: RECIPIENT
-      });
-    }
 
     return buildJsonResponse_(200, { status: 'success', message: 'Email sent successfully.' });
   } catch (err) {
