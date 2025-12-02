@@ -17,6 +17,7 @@
             --glass-bg: linear-gradient(235deg, hsl(var(--hue1) 50% 10% / 0.8), hsl(var(--hue1) 50% 10% / 0) 33%), 
                         linear-gradient(45deg , hsl(var(--hue2) 50% 6% / 0.8), hsl(var(--hue2) 50% 6% / 0) 33%), 
                         linear-gradient(hsl(120deg 25% 4.8% / 0.66));
+            --grid-size: 40px; /* base grid square size (20% smaller than original 50px) */
         }
 
         * {
@@ -107,18 +108,18 @@
                 repeating-linear-gradient(
                     0deg,
                     transparent,
-                    transparent 39px,
-                    hsl(var(--hue1) 50% 30% / 0.08) 39px,
-                    hsl(var(--hue1) 50% 30% / 0.08) 40px
+                    transparent calc(var(--grid-size) - 1px),
+                    hsl(var(--hue1) 50% 30% / 0.08) calc(var(--grid-size) - 1px),
+                    hsl(var(--hue1) 50% 30% / 0.08) var(--grid-size)
                 ),
                 repeating-linear-gradient(
                     90deg,
                     transparent,
-                    transparent 39px,
-                    hsl(var(--hue1) 50% 30% / 0.08) 39px,
-                    hsl(var(--hue1) 50% 30% / 0.08) 40px
+                    transparent calc(var(--grid-size) - 1px),
+                    hsl(var(--hue1) 50% 30% / 0.08) calc(var(--grid-size) - 1px),
+                    hsl(var(--hue1) 50% 30% / 0.08) var(--grid-size)
                 );
-            background-size: 40px 40px, 40px 40px;
+            background-size: var(--grid-size) var(--grid-size), var(--grid-size) var(--grid-size);
             background-position: center, center;
         }
 
@@ -163,18 +164,18 @@
                 repeating-linear-gradient(
                     0deg,
                     transparent,
-                    transparent 49px,
-                    rgba(0, 0, 0, 0.15) 49px,
-                    rgba(0, 0, 0, 0.15) 50px
+                    transparent calc(var(--grid-size) - 1px),
+                    rgba(0, 0, 0, 0.15) calc(var(--grid-size) - 1px),
+                    rgba(0, 0, 0, 0.15) var(--grid-size)
                 ),
                 repeating-linear-gradient(
                     90deg,
                     transparent,
-                    transparent 49px,
-                    rgba(0, 0, 0, 0.15) 49px,
-                    rgba(0, 0, 0, 0.15) 50px
+                    transparent calc(var(--grid-size) - 1px),
+                    rgba(0, 0, 0, 0.15) calc(var(--grid-size) - 1px),
+                    rgba(0, 0, 0, 0.15) var(--grid-size)
                 );
-            background-size: 50px 50px;
+            background-size: var(--grid-size) var(--grid-size);
             pointer-events: none;
             z-index: 1;
         }
@@ -1483,9 +1484,10 @@
         }
 
         // Grid snapping functions
-        const GRID_SIZE = 50; // Grid square size in pixels
-        const MIN_SQUARES = 20; // Minimum number of grid squares (slightly narrower cards)
-        const MAX_SQUARES = 30; // Maximum number of grid squares (slightly narrower cards)
+        const rootStyles = getComputedStyle(document.documentElement);
+        const GRID_SIZE = parseInt(rootStyles.getPropertyValue('--grid-size')) || 50; // Grid square size in pixels (synced with CSS)
+        const MIN_SQUARES = 24; // Minimum number of grid squares (wider cards)
+        const MAX_SQUARES = 36; // Maximum number of grid squares (wider cards)
 
         function snapToGrid(value, gridSize) {
             return Math.floor(value / gridSize) * gridSize;
