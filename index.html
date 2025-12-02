@@ -1670,7 +1670,7 @@
                     // Calculate height based on contact section position
                     const contactRect = contactSection.getBoundingClientRect();
                     // Subtract 200px so the overlay ends higher above the very bottom
-                    const contactBottom = contactRect.bottom + window.scrollY - 50;
+                    const contactBottom = contactRect.bottom + window.scrollY - 700;
                     backgroundEffects.style.height = `${contactBottom}px`;
                     backgroundEffects.style.maxHeight = `${contactBottom}px`;
                     gridBackground.style.height = `${contactBottom}px`;
