@@ -1773,7 +1773,8 @@
                 const response = await fetch(WEBHOOK_URL, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        // Use a "simple" content type to avoid CORS preflight issues
+                        'Content-Type': 'text/plain;charset=utf-8',
                     },
                     body: JSON.stringify(formData)
                 });
