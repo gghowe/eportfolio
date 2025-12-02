@@ -777,7 +777,7 @@
         .form-message {
             padding: 1rem;
             border-radius: var(--radius);
-            margin-top: 1rem;
+            margin-top: 100px; /* appear lower below the form */
             text-align: center;
             font-size: 0.95rem;
             display: none;
@@ -1790,6 +1790,15 @@
                     
                     // Scroll to message
                     formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                    // Auto-hide success message after 5 seconds
+                    if (formMessage._hideTimeout) {
+                        clearTimeout(formMessage._hideTimeout);
+                    }
+                    formMessage._hideTimeout = setTimeout(() => {
+                        formMessage.style.display = 'none';
+                        formMessage.classList.remove('success', 'error');
+                    }, 5000);
                 } else {
                     throw new Error('Server error');
                 }
